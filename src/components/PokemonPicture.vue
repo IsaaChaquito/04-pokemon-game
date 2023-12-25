@@ -21,6 +21,8 @@ img{
   user-select: none;
   -webkit-user-select: none;
   position: absolute;
+
+  filter: drop-shadow(0 0 0.75rem #000000);
 }
 
 .hidden-pokemon{

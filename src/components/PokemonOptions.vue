@@ -26,8 +26,18 @@ export default {
         width: 300px;
         height: 10px;
         padding: 10px;
-        background: red;
         margin: 10px;
+        text-align: center;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: .24s;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.25), inset 0px 0px 0px 1px rgba(255, 255, 255, 0.1);
     }
 
+    option:hover{
+        background: #000000;
+        color: #fff;
+        scale: 1.05;
+    }
+    
 </style>
