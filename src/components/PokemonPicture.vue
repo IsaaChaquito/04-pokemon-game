@@ -1,19 +1,56 @@
 <template>
 
-  <div class="pokemon-container">
-    <img class="hidden-pokemon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="pokemon">
+  <div class="pokemon-container" ref="tiltedElement">
+    <img class="hidden-pokemon" :src="imgSrc" alt="pokemon" >
 
-    <img class="animate__animated animate__fadeIn" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="pokemon">
+    <img v-if="showPokemon" class="animate__animated animate__fadeIn" :src="imgSrc" alt="pokemon" >
   </div>
 
   
 </template>
 
 <script>
+
+import VanillaTilt from 'vanilla-tilt';
+
 export default {
+
+  props:{
+    pokemonId: {
+      type: Number,
+      default: 1,
+      required: true,
+    },
+    showPokemon: {
+      type: Boolean,
+      required: true,
+      default: false
+    }
+  },
+
+  computed: {
+      imgSrc() {
+          return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${ this.pokemonId }.svg`
+      }
+    },
+
+    mounted() {
+    // Accede al elemento después de que se haya montado el componente
+    const element = this.$refs.tiltedElement;
+
+    // Inicializa VanillaTilt en el elemento
+    VanillaTilt.init(element, {
+      max: 25,
+      speed: 400,
+      glare: true,
+      'max-glare': .3,
+      reverse: true,
+    });
+  },
 
 }
 </script>
+
 
 <style>
 
@@ -21,19 +58,22 @@ img{
   user-select: none;
   -webkit-user-select: none;
   position: absolute;
-
-  filter: drop-shadow(0 0 0.75rem #000000);
+  height: 250px;
+  width: 250px;
+  filter: drop-shadow(0 0 0.25rem #000000);
 }
 
 .hidden-pokemon{
-  filter: brightness(0);
+  filter: brightness(0) drop-shadow(0 0 0.25rem #000000);
 }
 
 .pokemon-container{
-  height: 200px;
+  width: 250px;
+  height: 250px;
   margin: 30px 0px;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
 }
 
-</style>>
+</style>
